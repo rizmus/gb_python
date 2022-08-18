@@ -62,9 +62,3 @@ print('\nПроизведение элементов A и B: ', result_h4)
 
 # Реализуйте алгоритм перемешивания списка.
 
-import random
-
-list_a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-print(list_a)
-random.shuffle(list_a)
-print(list_a)

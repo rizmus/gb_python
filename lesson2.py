@@ -57,8 +57,14 @@ for i in range(-n_for_list, n_for_list + 1):
     list.append(i)
 result_h4 = list[a_position] * list[b_position]
 print('Список [-N, N] элементов:', list, '\nЧисло A: ', a_position, '\nЧисло B: ', b_position)
-print('\nПроизведение элементов A и B: ', result_h4)
+print('Произведение элементов A и B: ', result_h4)
 
 
 # Реализуйте алгоритм перемешивания списка.
 
+import random
+
+list_a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+print('\nЗадача 5\nИзначальный список:', list_a)
+random.shuffle(list_a)
+print('Список после перемешивания:', list_a)

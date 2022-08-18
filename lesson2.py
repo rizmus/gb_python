@@ -59,7 +59,6 @@ result_h4 = list[a_position] * list[b_position]
 print('Список [-N, N] элементов:', list, '\nЧисло A: ', a_position, '\nЧисло B: ', b_position)
 print('Произведение элементов A и B: ', result_h4)
 
-
 # Реализуйте алгоритм перемешивания списка.
 
 import random

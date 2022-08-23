@@ -52,16 +52,20 @@ print('Ответ к задаче №4:', ''.join(map(str, num_list_w4)))
 
 #Задача №5
 
+
 num_w5 = int(input('Задача №5. Введите число: '))
 num_list_w5 = [0, 1]
 num_list_w5_rev = []
 f = 2
-while f != num_w5 + 1:
-    num_list_w5.append(num_list_w5[f-1] + num_list_w5[f-2])
-    f += 1
-for i in num_list_w5:
-    if i > 0:
-        num_list_w5_rev.append(i * -1)
-num_list_w5_rev.reverse()
-list_result = num_list_w5_rev + num_list_w5
-print('Ответ к задаче №5: ', list_result)
+if num_w5 > 0:
+    while f != num_w5 + 1:
+        num_list_w5.append(num_list_w5[f-1] + num_list_w5[f-2])
+        f += 1
+    for i in num_list_w5:
+        if i > 0:
+            num_list_w5_rev.append(i * -1)
+    num_list_w5_rev.reverse()
+    list_result = num_list_w5_rev + num_list_w5
+    print('Ответ к задаче №5: ', list_result)
+else:
+    print('Что-то пошло не так :)')

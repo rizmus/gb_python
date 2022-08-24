@@ -43,7 +43,7 @@ list_uniq = []
 for i in list_nums:
     if i not in list_uniq:
         list_uniq.append(i)
-print('Задача 3\nВывод неповторяющихся чисел спсика:', list_uniq)
+print('Задача №3\nВывод неповторяющихся чисел спсика:', list_uniq)
 
 # Задача 4
 # Задана натуральная степень k. Сформировать случайным образом список
@@ -53,7 +53,7 @@ print('Задача 3\nВывод неповторяющихся чисел сп
 import random
 f = open('polynomial.txt', 'w')
 
-k = 5
+k = int(input('Задача №4\nВведите натуральную степень k: '))
 list_w4 = []
 value = 0
 count = 2
@@ -69,16 +69,16 @@ for i in range(1, k + 1):
         count += 1
 
 list_w4.reverse()
-print(list_w4)
 for num in list_w4:
     polynomial += str(num)
-print(polynomial)
+print('Вывод сгенерированного многочлена: ', polynomial)
 f.write(polynomial)
 f.close()
 
 # Задача 5
 # Даны два файла, в каждом из которых находится запись многочлена.
 # Задача - сформировать файл, содержащий сумму многочленов.
+import re
 
 f1 = open('polynomial1.txt', 'r')
 str1 = f1.read()
@@ -91,13 +91,75 @@ f2.close()
 polynomial1_list = []
 polynomial2_list = []
 sum_d = {}
+sum_d2 = {}
+sum_d_list = []
 
 polynomial1_list = str1.split(sep=' + ')
 polynomial2_list = str2.split(sep=' + ')
 
-print('первый файл: ', polynomial1_list)
-print('второй файл: ', polynomial2_list)
+print('Задача №5')
 
 
+polynomial1_list.reverse()
+polynomial2_list.reverse()
 
+# Первый список
+sum_d[0] = polynomial1_list[0] # num
+xz = re.findall('[0-9]+', polynomial1_list[1]) #num x
+sum_d[1] = xz[0]
+
+for index, item in enumerate(polynomial1_list):
+    if index > 1:
+        xz = re.findall('[0-9]+', polynomial1_list[index])
+        sum_d[int(xz[1])] = xz[0]
+
+# Второй список
+sum_d2[0] = polynomial2_list[0] # num
+xz = re.findall('[0-9]+', polynomial2_list[1]) #num x
+sum_d2[1] = xz[0]
+
+for index, item in enumerate(polynomial2_list):
+    if index > 1:
+        xz = re.findall('[0-9]+', polynomial2_list[index])
+        sum_d2[int(xz[1])] = xz[0]
+
+# Суммируем значения в словаре
+
+if len(sum_d) >= len (sum_d2):
+    for i in range(0, len(sum_d)):
+        if i <= len(sum_d2) - 1:
+            sum_d_list.append(int(sum_d[i]) + int(sum_d2[i]))
+        else:
+            sum_d_list.append(sum_d[i])
+else:
+    for i in range(0, len(sum_d2)):
+        if i <= len(sum_d) - 1:
+            sum_d_list.append(int(sum_d[i]) + int(sum_d2[i]))
+        else:
+            sum_d_list.append(sum_d2[i])
+
+#Собираем многочлен и отправляем в файл:
+list_w5 = []
+count = 2
+for i in range(1, len(sum_d_list)):
+    if i == 1:
+        list_w5.append(str(sum_d_list[0]))
+        list_w5.append(str(sum_d_list[1]) + 'x' + ' + ')
+    else:
+        list_w5.append(str(sum_d_list[i]) + 'x**' + str(count) + ' + ')
+        count += 1
+
+list_w5.reverse()
+
+# Делаем строку и отправляем в файл
+
+f_sum = open('polynomial_sum.txt', 'w')
+
+polynomial_sum = ''
+
+for num in list_w5:
+    polynomial_sum += str(num)
+print('Вывод суммы многочленов: ', polynomial_sum)
+f_sum.write(polynomial_sum)
+f_sum.close()
 

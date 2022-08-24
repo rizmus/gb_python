@@ -50,10 +50,54 @@ print('Задача 3\nВывод неповторяющихся чисел сп
 # коэффициентов (значения от 0 до 100) многочлена и записать в файл многочлен степени k.
 # *Пример:* - k=2 => 2*x² + 4*x + 5 = 0 или x² + 5 = 0 или 10*x² = 0
 
+import random
+f = open('polynomial.txt', 'w')
 
+k = 5
+list_w4 = []
+value = 0
+count = 2
+polynomial = ''
 
+for i in range(1, k + 1):
+    value = random.randint(0, 100)
+    if i == 1:
+        list_w4.append(str(value))
+        list_w4.append(str(value) + 'x' + ' + ')
+    else:
+        list_w4.append(str(value) + 'x**' + str(count) + ' + ')
+        count += 1
+
+list_w4.reverse()
+print(list_w4)
+for num in list_w4:
+    polynomial += str(num)
+print(polynomial)
+f.write(polynomial)
+f.close()
 
 # Задача 5
 # Даны два файла, в каждом из которых находится запись многочлена.
 # Задача - сформировать файл, содержащий сумму многочленов.
+
+f1 = open('polynomial1.txt', 'r')
+str1 = f1.read()
+f1.close()
+
+f2 = open('polynomial2.txt', 'r')
+str2 = f2.read()
+f2.close()
+
+polynomial1_list = []
+polynomial2_list = []
+sum_d = {}
+
+polynomial1_list = str1.split(sep=' + ')
+polynomial2_list = str2.split(sep=' + ')
+
+print('первый файл: ', polynomial1_list)
+print('второй файл: ', polynomial2_list)
+
+
+
 

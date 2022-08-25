@@ -3,7 +3,14 @@
 # *Пример: при $d = 0.001, π = 3.141.$    $10^{-1} ≤ d ≤10^{-10}$
 # https://completerepair.ru/kak-vychislit-chislo-pi
 
+d = 0.001
+print('Задача №1\nЗаданная точность d =', d)
+from decimal import Decimal
+d = int(Decimal(str(d)).as_tuple().exponent*(-1))
 
+steps = 1000000
+pi = sum((-1.0)**n / (2.0*n+1.0) for n in reversed(range(steps))) * 4
+print('Число π с точностью d:', round(pi, d))
 
 # Задача 2
 # Задайте натуральное число N. Напишите программу, которая

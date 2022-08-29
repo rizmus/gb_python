@@ -12,9 +12,12 @@ def input_player():
 
 
 def rand_bot(result):
-    value = result
-    while result - value <= 29:
-        value = randint(1, 28)
+    if result <= 56:
+        value = result - 29
+    else:
+        value = result
+        while result - value <= 29:
+            value = randint(1, 28)
     return value
 
 

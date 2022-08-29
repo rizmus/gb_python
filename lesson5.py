@@ -43,7 +43,7 @@ while count_game != 0:
         user_move = input_player()
         count_player = 1
     else:
-        if count_game > 57:
+        if count_game > 29:
             user_move = rand_bot(count_game)
         else:
             user_move = randint(1, 28)

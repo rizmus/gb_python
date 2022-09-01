@@ -1,3 +1,23 @@
+
+# 1 . Напишите программу, удаляющую из текста все слова, содержащие ""абв"".
+# Создайте абвпрограмму для игры с конфабветами человек против человека
+
+f = open('text.txt', 'w')
+
+text_value = input('Введите текст где необходимо убрать авб:\n')
+text_abv = ' '.join(filter(lambda x: 'абв' not in x, text_value.split()))
+
+f.write(text_abv)
+f.close()
+
+# 2. Создайте программу для игры с конфетами человек против человека.
+#    Условие задачи: На столе лежит 2021 конфета. Играют два игрока делая ход друг после друга.
+#    Первый ход определяется жеребьёвкой. За один ход можно забрать не более чем 28 конфет. Все конфеты оппонента достаются сделавшему последний ход. Сколько конфет нужно взять первому игроку, чтобы забрать все конфеты у своего конкурента?
+#    a) Добавьте игру против бота
+#    b) Подумайте как наделить бота ""интеллектом""
+
+
+
 from random import randint
 from time import sleep
 
@@ -64,18 +84,87 @@ while count_game != 0:
         break
 
 
-# 1 . Напишите программу, удаляющую из текста все слова, содержащие ""абв"".
-
-text_abv = filter(lambda x: 'абв' not in x, 'Создайте абвпрограмму для игры с конфабветами человек против человека'.split())
-print(*text_abv)
-
-# 2. Создайте программу для игры с конфетами человек против человека.
-#    Условие задачи: На столе лежит 2021 конфета. Играют два игрока делая ход друг после друга.
-#    Первый ход определяется жеребьёвкой. За один ход можно забрать не более чем 28 конфет. Все конфеты оппонента достаются сделавшему последний ход. Сколько конфет нужно взять первому игроку, чтобы забрать все конфеты у своего конкурента?
-#    a) Добавьте игру против бота
-#    b) Подумайте как наделить бота ""интеллектом""
-
 # 3. Создайте программу для игры в ""Крестики-нолики"".
-#
+
+board = range(1, 10)
+board = list(board)
+def board_game(board):
+    count = 1
+    for i in range(3):
+        print('\t    |     |')
+        print('\t', board[0 + i * 3], ' | ', board[1 + i * 3], ' | ', board[2 + i * 3])
+        if count < 3:
+            print('\t____|_____|____')
+            count += 1
+    print('\t    |     |')
+
+#user move
+def user_move(player_id):
+    valid = False
+    while not valid:
+        player_answer = input('Куда поставить ' + player_id + ': ')
+        try:
+            player_answer = int(player_answer)
+        except:
+            print('Не корректный ввод. Это число?')
+            continue
+        if player_answer >=1 and player_answer <=9:
+            if str(board[player_answer - 1]) not in 'XO':
+                board[player_answer - 1] = player_id
+                valid = True
+            else:
+                print('Эта клетка занята')
+        else:
+            print('Чтобы совершить ход введите число от 1 до 9')
+
+def your_win(board):
+    win_position = ((0, 1, 2), (3, 4, 5), (6, 7, 8), (0, 3, 6), (1, 4, 7), (2, 5, 8), (0, 4, 8), (2, 4, 6))
+    for position in win_position:
+        if board[position[0]] == board[position[0]] == board[position[0]]:
+            return board[position[0]]
+    return False
+
+counter = 0
+win = False
+
+while not win:
+    board_game(board)
+    if counter % 2 == 0:
+        user_move('X')
+    else:
+        user_move('O')
+    counter += 1
+    if counter > 4:
+        temp = your_win(board)
+        if temp:
+            print(temp, 'победил!')
+            win = True
+            break
+    if counter == 9:
+        print('У вас ничья!')
+        break
+
 # 4. Реализуйте RLE алгоритм: реализуйте модуль сжатия и восстановления данных.
 #    Входные и выходные данные хранятся в отдельных текстовых файлах.
+
+def rle(data):
+    data_encode = ""
+    i = 0
+    while i < len(data):
+        count = 1
+
+        while i + 1 < len(data) and data[i] == data[i + 1]:
+            count = count + 1
+            i = i + 1
+
+        data_encode += str(count) + data[i]
+        i = i + 1
+
+    return data_encode
+
+f_in = open('files/f_in.txt', 'r')
+f_out = open('files/f_out.txt', 'w')
+f_out.write(rle(f_in.read()))
+
+f_in.close()
+f_out.close()

@@ -1,7 +1,7 @@
-first_name_list = []
-surname_list = []
-tel_list = []
-description_list = []
+first_name_list = ['Роман', 'Владимир', 'Роман']
+surname_list = ['', '', '']
+tel_list = ['', '', '']
+description_list = ['', '', '']
 
 
 #Импорт в телефонную книгу
@@ -60,6 +60,28 @@ def view_book():
     for index, item in enumerate(first_name_list):
         view_one_item(index)
 
+# Поиск
+def find_book(item):
+    count = 0
+    for index, val in enumerate(first_name_list):
+        if val == item:
+            view_one_item(index)
+            count += 1
+    for index, val in enumerate(surname_list):
+        if val == item:
+            view_one_item(index)
+            count += 1
+    for index, val in enumerate(tel_list):
+        if val == item:
+            view_one_item(index)
+            count += 1
+    for index, val in enumerate(description_list):
+        if val == item:
+            view_one_item(index)
+            count += 1
+    if count == 0:
+        print('Нет совпадений.')
+
 
 def menu_book():
     print('\n---')
@@ -86,8 +108,9 @@ def menu_book():
     elif menu_item == 'import':
         import_data_book(input('Введите название файла: '))
         menu_book()
+    elif menu_item == 'find':
+        find_book(input('Введите данные для поиска: '))
+        menu_book()
     elif menu_item == 'exit':
         print('До скорых встреч!')
         return
-
-menu_book()

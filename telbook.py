@@ -1,7 +1,7 @@
 first_name_list = ['Роман', 'Владимир', 'Роман']
-surname_list = ['', '', '']
-tel_list = ['', '', '']
-description_list = ['', '', '']
+surname_list = ['Бережной', 'Камазов', 'Юхтевич']
+tel_list = ['42412', '52512', '51252145']
+description_list = ['python', 'node js', 'qa']
 
 
 #Импорт в телефонную книгу
@@ -19,6 +19,19 @@ def import_data_book(file):
         count += 1
     print('Добавлено', count, 'записей.')
 
+def export_data_book(file):
+    f = open(file, 'w')
+    tmp_list = []
+    for index, item in enumerate(first_name_list):
+        tmp_list.append(first_name_list[index])
+        tmp_list.append(surname_list[index])
+        tmp_list.append(tel_list[index])
+        tmp_list.append(description_list[index])
+        temp_line = ';'.join(tmp_list)
+        f.write(temp_line + '\n')
+        tmp_list.clear()
+    f.close()
+export_data_book('test.txt')
 
 # Ввод данных:
 def add_contact():
@@ -45,6 +58,7 @@ def view_one_item(index):
     check_for_emptiness(tel_list, index)
     check_for_emptiness(description_list, index)
 
+#Удаление контакта
 def remove_one_item(id):
     id = int(id)
     first_name_list.remove(id)
@@ -107,6 +121,8 @@ def menu_book():
         menu_book()
     elif menu_item == 'import':
         import_data_book(input('Введите название файла: '))
+    elif menu_item == 'export':
+        import_data_book(input('Введите название файла: '))
         menu_book()
     elif menu_item == 'find':
         find_book(input('Введите данные для поиска: '))
@@ -114,3 +130,9 @@ def menu_book():
     elif menu_item == 'exit':
         print('До скорых встреч!')
         return
+    else:
+        print('Произошла ошибка, попробуем еще?')
+        menu_book()
+
+
+# menu_book()

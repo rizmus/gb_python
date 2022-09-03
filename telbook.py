@@ -1,3 +1,5 @@
+import functools
+
 first_name_list = []
 surname_list = []
 tel_list = []
@@ -5,12 +7,12 @@ description_list = []
 
 
 #Импорт в телефонную книгу
-def import_data_book(file):
+def import_data_book(file, separator):
     f = open(file, 'r')
     count = 0
     tmp_list = []
     for i in f:
-        tmp_list = i.split(';')
+        tmp_list = i.split(separator)
         first_name_list.append(tmp_list[0])
         surname_list.append(tmp_list[1])
         tel_list.append(tmp_list[2])
@@ -18,6 +20,7 @@ def import_data_book(file):
         tmp_list.clear()
         count += 1
     print('Добавлено', count, 'записей.')
+
 
 def export_data_book(file):
     f = open(file, 'w')
@@ -120,7 +123,8 @@ def menu_book():
         remove_one_item(input('Введите ID для удаления контакта: '))
         menu_book()
     elif menu_item == 'import':
-        import_data_book(input('Введите название файла: '))
+        import_data_book(input('Введите название файла: '), input('Введите разделитель: '))
+        menu_book()
     elif menu_item == 'export':
         import_data_book(input('Введите название файла: '))
         menu_book()
@@ -135,4 +139,4 @@ def menu_book():
         menu_book()
 
 
-# menu_book()
+menu_book()

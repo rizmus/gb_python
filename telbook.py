@@ -1,7 +1,7 @@
-first_name_list = ['Роман', 'Владимир', 'Роман']
-surname_list = ['Бережной', 'Камазов', 'Юхтевич']
-tel_list = ['42412', '52512', '51252145']
-description_list = ['python', 'node js', 'qa']
+first_name_list = []
+surname_list = []
+tel_list = []
+description_list = []
 
 
 #Импорт в телефонную книгу

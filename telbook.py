@@ -26,15 +26,15 @@ def export_data_book(file):
     f = open(file, 'w')
     tmp_list = []
     for index, item in enumerate(first_name_list):
-        tmp_list.append(first_name_list[index])
-        tmp_list.append(surname_list[index])
-        tmp_list.append(tel_list[index])
-        tmp_list.append(description_list[index])
+        tmp_list = zip(first_name_list[index], surname_list[index], tel_list[index], description_list[index])
+        # tmp_list.append(first_name_list[index])
+        # tmp_list.append(surname_list[index])
+        # tmp_list.append(tel_list[index])
+        # tmp_list.append(description_list[index])
         temp_line = ';'.join(tmp_list)
         f.write(temp_line + '\n')
         tmp_list.clear()
     f.close()
-export_data_book('test.txt')
 
 # Ввод данных:
 def add_contact():
@@ -126,7 +126,7 @@ def menu_book():
         import_data_book(input('Введите название файла: '), input('Введите разделитель: '))
         menu_book()
     elif menu_item == 'export':
-        import_data_book(input('Введите название файла: '))
+        export_data_book(input('Введите название файла: '))
         menu_book()
     elif menu_item == 'find':
         find_book(input('Введите данные для поиска: '))

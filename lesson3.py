@@ -5,7 +5,9 @@ value = 0
 for index, item in enumerate(number_list):
     if index % 2 != 0:
         value += item
-print('Ответ к задаче №1: ',value)
+print('Ответ к задаче №1: ', value)
+
+
 
 # Задача №2
 list_w2 = [2, 3, 4, 5, 6]

@@ -1,5 +1,3 @@
-import functools
-
 first_name_list = []
 surname_list = []
 tel_list = []
